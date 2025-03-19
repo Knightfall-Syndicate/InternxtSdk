@@ -14,7 +14,7 @@ on:
 jobs:
   build:
 
-    runs-on: [self-hosted, netcore-sdk-9]
+    runs-on: [self-hosted, netcore-sdk-6]
 
     steps:
       - name: Checkout code
@@ -35,16 +35,11 @@ jobs:
   publish:
     needs: build
     if: startsWith(github.ref, 'refs/tags/v')
-    runs-on: [self-hosted, netcore-sdk-9]
+    runs-on: [self-hosted, netcore-sdk-6]
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 6.0.x
 
       - name: Restore dependencies
         run: dotnet restore
